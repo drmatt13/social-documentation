@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
 
 // context
 import { useGlobalContext } from "../context/globalContext";
@@ -18,6 +17,10 @@ const Navbar = ({ setShowMobileSideNav, setShowMobileMenuOptions }: Props) => {
 
   const [darkBackground, setDarkBackground] = useState(false);
   const [transition, setTransition] = useState(false);
+  const [path, setPath] = useState({
+    first: "",
+    second: "",
+  });
 
   const handleScroll = useCallback(() => {
     window.scrollY > 25
@@ -41,6 +44,20 @@ const Navbar = ({ setShowMobileSideNav, setShowMobileMenuOptions }: Props) => {
       setTransition(() => false);
     }
   }, [darkMode, setTransition]);
+
+  useEffect(() => {
+    if (router.asPath === "/") {
+      setPath(() => ({
+        first: "",
+        second: "home",
+      }));
+    } else {
+      setPath(() => ({
+        first: router.asPath.split("/")[1].split("-").join(" "),
+        second: router.asPath.split("/")[2].split("-").join(" "),
+      }));
+    }
+  }, [router.asPath]);
 
   return (
     <nav
@@ -110,34 +127,32 @@ const Navbar = ({ setShowMobileSideNav, setShowMobileMenuOptions }: Props) => {
           </div>
         </div>
         <div className="lg:hidden h-14 px-5 lg:px-10 xl:px-14">
-          <div className="font-thin text-sm sm:text-base text-slate-900 dark:text-gray-300 w-full h-full flex items-center border-t border-gray-900/20 dark:border-white/10">
+          <div className="text-sm sm:text-base text-slate-900 dark:text-gray-300 w-full h-full flex items-center border-t border-gray-900/20 dark:border-white/10">
             <div className="ml-2 text-lg">
               <i
                 onClick={() => setShowMobileSideNav(true)}
                 className="fa-solid fa-bars cursor-pointer hover:text-sky-400 dark:hover:text-white"
               />
             </div>
-            {/* <div className="ml-5">
-              {router.asPath === "/" ? (
-                <div className="font-semibold">home</div>
-              ) : (
-                <div className="font-thin">
-                  {router.asPath.split("/")[1].split("-").join(" ")}
-                </div>
+            <div className="ml-5 flex">
+              {path.first !== "" && (
+                <>
+                  <div className="font-thin text-black/90 dark:text-gray-300/90">
+                    {path.first}
+                  </div>
+                  <div className="ml-2.5 sm:ml-3">
+                    <i className="fa-solid fa-chevron-right text-[.6rem] text-gray-600" />
+                  </div>
+                </>
               )}
+              <div
+                className={`${
+                  path.first !== "" && "ml-2.5 sm:ml-3"
+                } font-semibold text-black/90 dark:text-gray-300/90`}
+              >
+                {path.second}
+              </div>
             </div>
-            {router.asPath === "/" ? (
-              <></>
-            ) : (
-              <>
-                <div className="ml-2.5 sm:ml-3">
-                  <i className="fa-solid fa-chevron-right text-[.6rem] text-gray-600" />
-                </div>
-                <div className="ml-2.5 sm:ml-3 font-semibold text-black/90 dark:text-gray-300/90">
-                  {router.asPath.split("/")[2].split("-").join(" ")}
-                </div>
-              </>
-            )} */}
           </div>
         </div>
       </div>
