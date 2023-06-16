@@ -11,10 +11,6 @@ interface Props {
   setShowMobileMenuOptions: (value: boolean) => void;
 }
 
-const capitalizeFirstLetter = (s: string) => {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};
-
 const Navbar = ({ setShowMobileSideNav, setShowMobileMenuOptions }: Props) => {
   const { darkMode, toggleDarkMode } = useGlobalContext();
   const navRef = useRef<HTMLDivElement>(null);
@@ -91,45 +87,6 @@ const Navbar = ({ setShowMobileSideNav, setShowMobileMenuOptions }: Props) => {
                     Github
                   </a>
                 </div>
-                {/* <div className="relative px-6 h-6 group pointer-events-none">
-                  <div className="group-hover:pointer-events-auto">
-                    <div className="hidden absolute top-0 left-0 h-6 w-full group-hover:block"></div>
-                    <div className="absolute top-0 left-0 h-4 w-44 translate-y-6">
-                      <div
-                        className={`${
-                          darkBackground
-                            ? "bg-white dark:bg-black/30"
-                            : "bg-white dark:bg-black/10"
-                        } overflow-hidden absolute top-4 opacity-50 group-hover:opacity-100 left-0 h-0 group-hover:h-[9.2rem] transition-all ease-out group-hover:ease-in group-hover:duration-150 duration-300 w-full dark:backdrop-blur group-hover:border border-gray-900/20 border-t-white dark:border-white/10 dark:border-t-black/[45%]`}
-                      >
-                        <div className="h-12 w-full px-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-black/20">
-                          <div className="h-full flex items-center pl-2">
-                            <Link href="/option-one" passHref>
-                              option one
-                            </Link>
-                          </div>
-                        </div>
-                        <div className="h-12 w-full px-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-black/20">
-                          <div className="h-full flex items-center pl-2">
-                            <Link href="/option-two" passHref>
-                              option two
-                            </Link>
-                          </div>
-                        </div>
-                        <div className="h-12 w-full px-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-black/20">
-                          <div className="h-full flex items-center pl-2">
-                            <Link href="/option-three" passHref>
-                              option three
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="group-hover:text-sky-400 dark:group-hover:text-white cursor-pointer pointer-events-auto">
-                      <div>Hover Here</div>
-                    </div>
-                  </div>
-                </div> */}
               </div>
               <div className="hidden lg:flex">
                 <div className="pl-6 border-l border-gray-900/20 dark:border-white/10">
@@ -140,11 +97,6 @@ const Navbar = ({ setShowMobileSideNav, setShowMobileMenuOptions }: Props) => {
                     onClick={toggleDarkMode}
                   />
                 </div>
-                {/* <div className="hover:text-sky-400 dark:hover:text-white cursor-pointer">
-                  <Link href="/login" passHref>
-                    Sign In
-                  </Link>
-                </div> */}
               </div>
               <div className="flex lg:hidden">
                 <div className="mr-1">
@@ -165,7 +117,7 @@ const Navbar = ({ setShowMobileSideNav, setShowMobileMenuOptions }: Props) => {
                 className="fa-solid fa-bars cursor-pointer hover:text-sky-400 dark:hover:text-white"
               />
             </div>
-            <div className="ml-5">
+            {/* <div className="ml-5">
               {router.asPath === "/" ? (
                 <div className="font-semibold">home</div>
               ) : (
@@ -185,7 +137,7 @@ const Navbar = ({ setShowMobileSideNav, setShowMobileMenuOptions }: Props) => {
                   {router.asPath.split("/")[2].split("-").join(" ")}
                 </div>
               </>
-            )}
+            )} */}
           </div>
         </div>
       </div>
